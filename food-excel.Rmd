@@ -1,7 +1,7 @@
 ---
 title: "Favorite foods"
-author: "YOU"
-date: "`r Sys.Date()`"
+author: "Sophie Boyd"
+date: "2-1-26"
 output: 
   html_document: 
     toc: yes
@@ -21,7 +21,7 @@ library(readxl)
 * Read in the Excel file called `favourite-food.xlsx` from the `data-raw/` folder.
 
 ```{r label-me1, eval=FALSE}
-fav_food <- read_excel(___)
+fav_food <- read_excel("data-raw/favourite-food.xlsx")
 fav_food
 ```
 
@@ -30,15 +30,25 @@ fav_food
 * Clean up the missing data (`NA`s) and make sure you're happy with variable types. Modify the `read_excel` function to take care of these issues.
 
 ```{r label-me2, eval=FALSE}
-fav_food <- read_excel(___, ___)
-fav_food 
+fav_food <- read_excel("data-raw/favourite-food.xlsx", 
+                       col_names = c("ID", "fullname", "favfood", "mealplan", "age", "SES"),
+                       na = c("N/A", "99999"))
+fav_food
+
+fav_food %>%
+  mutate(age = case_when(
+    fullname == "Chidiegwu Dunkel" ~ 5,
+    TRUE ~ as.numeric(age)
+  )) %>%
+  summarize(mean_age = mean(age, na.rm = TRUE))
 ```
 
 * Convert the SES (socioeconomic status) to a factor variables with levels in the 
 following order: `Low`, `Middle`, `High`.
 
 ```{r label-me3}
-# add code here
+SES <- factor(c("Low", "Middle", "High"))
+SES
 ```
 
 ## Step 3: Save to CSV
@@ -46,7 +56,7 @@ following order: `Low`, `Middle`, `High`.
 * Write out the resulting data frame to `favourite-food.csv` in the `data/` folder.
 
 ```{r label-me4}
-# add code here
+write_csv(fav_food, file = "data-raw/favourite-food.csv")
 ```
 
 ## Step 5: Verify CSV Data
@@ -55,7 +65,8 @@ following order: `Low`, `Middle`, `High`.
 observe the variable types. Are they as you left them?
 
 ```{r label-me5}
-# add code here
+fav_food_copy <- read_csv(file = "data-raw/favourite-food.csv")
+fav_food_copy
 ```
 
 # Part 2: Excel to RDS Workflow
