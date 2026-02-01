@@ -1,0 +1,64 @@
+---
+title: "Sales"
+author: "YOU"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r load-packages, message=FALSE}
+library(tidyverse)
+library(readxl)
+```
+
+* Read in the Excel file called `sales.xlsx` from the `data-raw/` folder 
+such that it looks like the following.
+
+```{r echo=FALSE}
+knitr::include_graphics("images/sales-1.png")
+```
+
+```{r}
+
+```
+
+* **Stretch goal:** Manipulate the sales data such such that it looks like the 
+following.
+
+```{r echo=FALSE}
+knitr::include_graphics("images/sales-2.png")
+```
+
+```{r}
+
+```
+
+## Hint 
+
+?read_excel 
+read_excel(path, sheet = NULL, range = NULL, col_names = TRUE,
+  col_types = NULL, na = "", trim_ws = TRUE, skip = 0,
+  n_max = Inf, guess_max = min(1000, n_max),
+  progress = readxl_progress(), .name_repair = "unique")
+  
+  
+  1. when you import the data, you can skip redundant rows. in this case, skip=3 seems great. 
+  2. when you import the data, you can assign column names. col_names=c("id","n") 
+  3. you can make new variable that can detect if vector contains certain value, using mutate() and str_detect(). in this case, we need to detect if "Brand" is in "id"column or not. 
+  4. if_else() function would be useful. 
+  5. fill() function is needed. 
+  
+  so, your answer would be like this :
+  ??<-read_excel("data-raw/sales.xlsx", ???,???)
+
+?<-?%>%
+  mutate(
+  ?? = str_detect(id,"Brand"),
+  brand = if_else(??,id,NULL)
+  ) %>%
+  fill(brand) %>%
+  filter(??) %>%
+  select(brand,id,n)
+  
+  
+## References {#references}
+1. Assignment Adapted from [Mine Cetinkaya-Rundel's Data Science in a Box](https://github.com/rstudio-education/datascience-box)

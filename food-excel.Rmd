@@ -1,0 +1,95 @@
+---
+title: "Favorite foods"
+author: "YOU"
+date: "`r Sys.Date()`"
+output: 
+  html_document: 
+    toc: yes
+    toc_float: yes
+---
+
+```{r load-packages, message=FALSE}
+library(tidyverse)
+library(readxl)
+```
+
+# Part 1: Excel to CSV Workflow
+
+
+## Step 1: Read the Data
+
+* Read in the Excel file called `favourite-food.xlsx` from the `data-raw/` folder.
+
+```{r label-me1, eval=FALSE}
+fav_food <- read_excel(___)
+fav_food
+```
+
+## Step 2: Clean the Data
+
+* Clean up the missing data (`NA`s) and make sure you're happy with variable types. Modify the `read_excel` function to take care of these issues.
+
+```{r label-me2, eval=FALSE}
+fav_food <- read_excel(___, ___)
+fav_food 
+```
+
+* Convert the SES (socioeconomic status) to a factor variables with levels in the 
+following order: `Low`, `Middle`, `High`.
+
+```{r label-me3}
+# add code here
+```
+
+## Step 3: Save to CSV
+
+* Write out the resulting data frame to `favourite-food.csv` in the `data/` folder.
+
+```{r label-me4}
+# add code here
+```
+
+## Step 5: Verify CSV Data
+
+* Finally, read `favourite-food.csv` back in from the `data/` folder and 
+observe the variable types. Are they as you left them?
+
+```{r label-me5}
+# add code here
+```
+
+# Part 2: Excel to RDS Workflow
+
+## Step 1: Read the Data
+* Similar to Part 1, read  the Excel file called `favourite-food.xlsx` from the `data-raw/` folder, and handle missing data and variable types.
+
+```{r label-me6, eval=FALSE}
+fav_food <- read_excel(___, ___)
+fav_food 
+```
+
+## Step 2: Adjust Variable Types
+
+* Convert SES (socioeconomic status) to a factor variables with levels in the 
+following order: `Low`, `Middle`, `High`.
+
+```{r label-me7}
+# add code here
+```
+
+## Step 3: Save to RDS
+* Write out the resulting data frame to `favourite-food.rds` in the `data/` folder.
+
+```{r label-me8}
+# add code here
+```
+
+* Read `favourite-food.rds` back in from the `data/` folder and observe the 
+variable types. Are they as you left them?
+
+```{r label-me9}
+# add code here
+```
+
+## References {#references}
+1. Assignment Adapted from [Mine Cetinkaya-Rundel's Data Science in a Box](https://github.com/rstudio-education/datascience-box)
